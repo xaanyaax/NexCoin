@@ -1,14 +1,21 @@
-// app/layout.tsx
-import './globals.css';
+
+// layout.tsx
+import './globals.css'
+import Navbar from "@/components/navbar";
+import { ReactNode } from "react";
+
 export const metadata = {
   title: 'My Crypto App',
   description: 'Track cryptocurrencies live.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
