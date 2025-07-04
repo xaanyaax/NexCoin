@@ -13,7 +13,7 @@ interface CryptoCardProps {
   };
   isLoading?: boolean;
 }
-<div></div>
+
 const CryptoCard: React.FC<CryptoCardProps> = ({ coin, isLoading = false }) => {
   if (isLoading) {
     return (
