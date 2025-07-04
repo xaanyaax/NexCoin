@@ -43,7 +43,7 @@ const NexCoinLanding = () => {
       description: 'Get in-depth info for each coin: price history, rank, volume, circulating supply, and social links.',
     },
     {
-      icon: '⭐',
+      icon: '🔥',
       title: 'Trending Coins',
       description: 'See what\'s hot right now with the latest trending cryptocurrencies on CoinGecko.',
     }
