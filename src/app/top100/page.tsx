@@ -25,7 +25,7 @@ const CryptoTop100Page: React.FC = () => {
       try {
         // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 2000));
-        
+
         // Mock data - replace with actual API call
         const mockCoins: CoinData[] = [
           {
@@ -56,7 +56,7 @@ const CryptoTop100Page: React.FC = () => {
             image: 'https://assets.coingecko.com/coins/images/975/large/cardano.png'
           }
         ];
-        
+
         setCoins(mockCoins);
         setLastUpdate(new Date());
       } catch (error) {
@@ -70,10 +70,10 @@ const CryptoTop100Page: React.FC = () => {
   }, []);
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     });
   };
 
@@ -105,79 +105,35 @@ const CryptoTop100Page: React.FC = () => {
       {/* Header Section */}
       <div className="relative z-10 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Navigation */}
-          <nav className="flex items-center justify-between mb-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-lg">₿</span>
-              </div>
-              <span className="text-white text-xl font-bold">CryptoTracker</span>
-            </div>
-            <div className="flex items-center space-x-6">
-              <button className="text-gray-400 hover:text-orange-400 transition-colors duration-300">
-                Markets
-              </button>
-              <button className="text-gray-400 hover:text-orange-400 transition-colors duration-300">
-                Portfolio
-              </button>
-              <button className="bg-orange-500 hover:bg-orange-600 text-black px-4 py-2 rounded-lg font-semibold transition-colors duration-300">
-                Connect Wallet
-              </button>
-            </div>
-          </nav>
 
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-gray-900 border border-orange-500 rounded-full px-4 py-2 mb-6">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-orange-400 text-sm font-medium">Live Market Data</span>
-            </div>
-            
-            <h1 className="text-6xl md:text-8xl font-black text-white mb-6 leading-tight">
+          
+
+            <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight">
               <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
                 TOP 100
               </span>
+              <span> 🔥</span>
               <br />
-              <span className="text-gray-300">CRYPTO</span>
-            </h1>
-            
-            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Discover the most valuable cryptocurrencies with real-time prices, 
-              market data, and 24-hour performance metrics. Stay ahead of the market.
-            </p>
 
-            {/* Stats Bar */}
-            <div className="flex flex-wrap justify-center gap-8 mb-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-400 mb-1">100+</div>
-                <div className="text-sm text-gray-500">Cryptocurrencies</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-400 mb-1">24/7</div>
-                <div className="text-sm text-gray-500">Live Updates</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-400 mb-1">Real-time</div>
-                <div className="text-sm text-gray-500">Market Data</div>
-              </div>
-            </div>
+            </h1>
+
+
+
+
+
+
+
 
             {/* Last Update */}
             <div className="inline-flex items-center space-x-2 text-gray-500 text-sm">
               <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
               <span>Last updated: {formatTime(lastUpdate)}</span>
             </div>
+            
           </div>
         </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10">
-        {/* <CryptoCardsGrid 
-          coins={coins} 
-          isLoading={isLoading}
-          loadingCount={12}
-        /> */}
       </div>
 
 

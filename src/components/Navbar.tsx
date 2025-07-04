@@ -118,7 +118,11 @@ const Navbar: React.FC = () => {
               <span>🔥</span>
               <span className="font-medium">Trending Coins</span>
             </button>
+
+           
           </div>
+
+      
 
           {/* Mobile Search */}
           <div className="relative">
