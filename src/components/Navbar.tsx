@@ -1,6 +1,6 @@
 "use client";
-
 import React, { useState } from 'react';
+import Link from "next/link"
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +19,7 @@ const Navbar: React.FC = () => {
           
           {/* Logo */}
           <div className="flex-shrink-0 gap-3.5">
+            <Link href={"/"}>
   <div className="flex items-center gap-2">
     <div className="text-3xl">
       ⭐️
@@ -27,6 +28,7 @@ const Navbar: React.FC = () => {
       NexCoin
     </span>
   </div>
+  </Link>
 </div>
 
 
@@ -34,17 +36,19 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
+            <Link href={"/top100"}>
             <button className="flex items-center space-x-2 text-gray-300 hover:text-orange-400 transition-colors duration-200">
               <span>🪙</span>
               <span className="font-medium">Top 100</span>
             </button>
+            </Link>
             <button className="flex items-center space-x-2 text-gray-300 hover:text-orange-400 transition-colors duration-200">
               <span>📈</span>
-              <span className="font-medium">Coin Price Chart</span>
+              <span className="font-medium">Coin Chart</span>
             </button>
             <button className="flex items-center space-x-2 text-gray-300 hover:text-orange-400 transition-colors duration-200">
               <span>🔥</span>
-              <span className="font-medium">Trending Coins</span>
+              <span className="font-medium">Trending</span>
             </button>
           </div>
 
