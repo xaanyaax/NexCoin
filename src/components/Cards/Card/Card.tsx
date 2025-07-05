@@ -1,21 +1,31 @@
 "use client";
 import React from 'react';
+import { Coin } from "@/library/types/coin";
 
+// Type for props
 interface CryptoCardProps {
-  coin: {
-    id: string;
-    name: string;
-    symbol: string;
-    current_price: number;
-    price_change_percentage_24h: number;
-    market_cap_rank: number;
-    image: string;
-  };
+  coin?: Coin;
   isLoading?: boolean;
 }
 
+// Utility: format price
+const formatPrice = (price: number) => {
+  if (price >= 1) {
+    return `$${price.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
+  }
+  return `$${price.toFixed(6)}`;
+};
+
+// Utility: format percentage
+const formatPercentage = (percentage: number) => {
+  return `${percentage > 0 ? '+' : ''}${percentage.toFixed(2)}%`;
+};
+
 const CryptoCard: React.FC<CryptoCardProps> = ({ coin, isLoading = false }) => {
-  if (isLoading) {
+  if (isLoading || !coin) {
     return (
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 animate-pulse">
         <div className="flex items-center justify-between mb-4">
@@ -28,7 +38,6 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ coin, isLoading = false }) => {
           </div>
           <div className="w-8 h-6 bg-gray-700 rounded"></div>
         </div>
-
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="h-4 bg-gray-700 rounded w-16"></div>
@@ -48,20 +57,6 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ coin, isLoading = false }) => {
   }
 
   const isPositiveChange = coin.price_change_percentage_24h > 0;
-
-  const formatPrice = (price: number) => {
-    if (price >= 1) {
-      return `$${price.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      })}`;
-    }
-    return `$${price.toFixed(6)}`;
-  };
-
-  const formatPercentage = (percentage: number) => {
-    return `${percentage > 0 ? '+' : ''}${percentage.toFixed(2)}%`;
-  };
 
   return (
     <div className="group bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-orange-500 hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300 cursor-pointer transform hover:scale-105">
@@ -83,9 +78,7 @@ const CryptoCard: React.FC<CryptoCardProps> = ({ coin, isLoading = false }) => {
             <h3 className="text-white font-semibold text-lg group-hover:text-orange-400 transition-colors duration-300">
               🪙 {coin.name}
             </h3>
-            <p className="text-gray-400 text-sm uppercase font-medium">
-              {coin.symbol}
-            </p>
+            <p className="text-gray-400 text-sm uppercase font-medium">{coin.symbol}</p>
           </div>
         </div>
         <div className="flex items-center justify-center w-8 h-8 bg-orange-500 text-black rounded-lg font-bold text-sm group-hover:bg-orange-400 transition-colors duration-300">

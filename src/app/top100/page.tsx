@@ -1,63 +1,20 @@
 "use client";
-
 import React, { useState, useEffect } from 'react';
-// import CryptoCardsGrid from './CryptoCardsGrid'; // Adjust import path as needed
-
-interface CoinData {
-  id: string;
-  name: string;
-  symbol: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-  market_cap_rank: number;
-  image: string;
-}
+import axios from "axios";
+import { Coin } from "@/library/types/coin";
+import CryptoCard from '@/components/Cards/Card/Card';
 
 const CryptoTop100Page: React.FC = () => {
-  const [coins, setCoins] = useState<CoinData[]>([]);
+  const [coins, setCoins] = useState<Coin[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
-  // Simulate API call - replace with your actual API call
   useEffect(() => {
     const fetchCryptoData = async () => {
       setIsLoading(true);
       try {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // Mock data - replace with actual API call
-        const mockCoins: CoinData[] = [
-          {
-            id: 'bitcoin',
-            name: 'Bitcoin',
-            symbol: 'BTC',
-            current_price: 65432.10,
-            price_change_percentage_24h: 2.45,
-            market_cap_rank: 1,
-            image: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
-          },
-          {
-            id: 'ethereum',
-            name: 'Ethereum',
-            symbol: 'ETH',
-            current_price: 3245.67,
-            price_change_percentage_24h: -1.23,
-            market_cap_rank: 2,
-            image: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
-          },
-          {
-            id: 'cardano',
-            name: 'Cardano',
-            symbol: 'ADA',
-            current_price: 0.4567,
-            price_change_percentage_24h: 5.78,
-            market_cap_rank: 3,
-            image: 'https://assets.coingecko.com/coins/images/975/large/cardano.png'
-          }
-        ];
-
-        setCoins(mockCoins);
+        const res = await axios.get<Coin[]>('/api/crypto/top100');
+        setCoins(res.data);
         setLastUpdate(new Date());
       } catch (error) {
         console.error('Error fetching crypto data:', error);
@@ -105,37 +62,31 @@ const CryptoTop100Page: React.FC = () => {
       {/* Header Section */}
       <div className="relative z-10 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4">
-
-          {/* Hero Section */}
           <div className="text-center mb-16">
-          
-
             <h1 className="text-6xl md:text-7xl font-black text-white mb-6 leading-tight">
               <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
                 TOP 100
               </span>
               <span> 🔥</span>
-              <br />
-
             </h1>
 
-
-
-
-
-
-
-
-            {/* Last Update */}
             <div className="inline-flex items-center space-x-2 text-gray-500 text-sm">
               <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
               <span>Last updated: {formatTime(lastUpdate)}</span>
             </div>
-            
           </div>
         </div>
       </div>
 
+      {/* Cards Section */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {isLoading
+            ? Array.from({ length: 9 }).map((_, i) => <CryptoCard key={i} isLoading />)
+            : coins.map((coin) => <CryptoCard key={coin.id} coin={coin} />)
+          }
+        </div>
+      </div>
 
       {/* CSS for animations */}
       <style jsx>{`

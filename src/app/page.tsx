@@ -56,7 +56,7 @@ const NexCoinLanding = () => {
         {/* Main Content */}
         <div className="relative z-10 text-center px-4">
           <div className="mb-8">
-            <div 
+            <div
               className="inline-block text-8xl animate-spin"
               style={{
                 animation: 'spin 4s linear infinite'
@@ -65,16 +65,16 @@ const NexCoinLanding = () => {
               ⭐
             </div>
           </div>
-          
+
           <h1 className="text-7xl md:text-9xl font-bold mb-6 bg-gradient-to-r  bg-clip-text  animate-pulse text-orange-500">
             NexCoin
           </h1>
-          
+
           <p className="text-2xl md:text-3xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Your gateway to the cryptocurrency universe. Track, analyze, and discover the future of digital assets.
           </p>
-          
-          
+
+
         </div>
 
         {/* Scroll Indicator */}
@@ -92,23 +92,23 @@ const NexCoinLanding = () => {
             const sectionStart = window.innerHeight + (index * window.innerHeight);
             const sectionEnd = sectionStart + window.innerHeight;
             const sectionCenter = sectionStart + (window.innerHeight / 2);
-            
+
             // Calculate progress through the section (0 to 1)
             const progress = Math.max(0, Math.min(1, (scrollY - sectionStart) / window.innerHeight));
-            
+
             // Calculate if we're in the active zone (middle 60% of the section)
-            const isInActiveZone = scrollY >= sectionCenter - (window.innerHeight * 0.3) && 
-                                   scrollY <= sectionCenter + (window.innerHeight * 0.3);
-            
+            const isInActiveZone = scrollY >= sectionCenter - (window.innerHeight * 0.3) &&
+              scrollY <= sectionCenter + (window.innerHeight * 0.3);
+
             // Calculate scale and opacity based on distance from center
             const distanceFromCenter = Math.abs(scrollY - sectionCenter);
             const maxDistance = window.innerHeight * 0.5;
             const proximityFactor = Math.max(0, 1 - (distanceFromCenter / maxDistance));
-            
+
             const scale = 0.8 + (proximityFactor * 0.4); // Scale from 0.8 to 1.2
             const opacity = 0.3 + (proximityFactor * 0.7); // Opacity from 0.3 to 1
             const translateY = (1 - proximityFactor) * 50; // Move up as it gets closer
-            
+
             return (
               <div
                 key={index}
@@ -120,7 +120,7 @@ const NexCoinLanding = () => {
                 }}
               >
                 <div className="max-w-2xl mx-auto">
-                  <div 
+                  <div
                     className="text-8xl md:text-9xl mb-8 inline-block"
                     style={{
                       transform: `rotate(${progress * 360}deg)`,
@@ -129,13 +129,12 @@ const NexCoinLanding = () => {
                   >
                     {feature.icon}
                   </div>
-                  
-                  <h3 
-                    className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-700 ${
-                      isInActiveZone 
-                        ? 'text-orange-400 bg-gradient-to-r  bg-clip-text ' 
+
+                  <h3
+                    className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-700 ${isInActiveZone
+                        ? 'text-orange-400 bg-gradient-to-r  bg-clip-text '
                         : 'text-gray-400'
-                    }`}
+                      }`}
                     style={{
                       transform: `translateX(${(0.5 - progress) * 100}px)`,
                       transition: 'color 0.7s ease'
@@ -143,11 +142,10 @@ const NexCoinLanding = () => {
                   >
                     {feature.title}
                   </h3>
-                  
-                  <p 
-                    className={`text-xl md:text-2xl leading-relaxed transition-colors duration-700 ${
-                      isInActiveZone ? 'text-gray-200' : 'text-gray-500'
-                    }`}
+
+                  <p
+                    className={`text-xl md:text-2xl leading-relaxed transition-colors duration-700 ${isInActiveZone ? 'text-gray-200' : 'text-gray-500'
+                      }`}
                     style={{
                       transform: `translateX(${(progress - 0.5) * 100}px)`,
                       transition: 'color 0.7s ease'
@@ -159,18 +157,7 @@ const NexCoinLanding = () => {
               </div>
 
             );
-
-          //   <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          //   <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-xl rounded-full hover:from-orange-500 hover:to-red-500 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-yellow-500/50">
-          //     Explore Now
-          //   </button>
-          //   <button className="px-8 py-4 border-2 border-white text-white font-bold text-xl rounded-full hover:bg-white hover:text-black transform hover:scale-105 transition-all duration-300">
-          //     Learn More
-          //   </button>
-          // </div>
           })}
-
-          
         </div>
       </div>
 
