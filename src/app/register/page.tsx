@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Eye, EyeOff, User, Mail, Lock, Sparkles } from 'lucide-react';
+import Link from "next/link"
 
 export default function RegisterPage() {
     const [formData, setFormData] = useState({
@@ -12,6 +13,20 @@ export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [particles, setParticles] = useState<
+        { left: string; top: string; animationDelay: string; animationDuration: string }[]
+    >([]);
+
+    useEffect(() => {
+        const generatedParticles = Array.from({ length: 20 }, () => ({
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${3 + Math.random() * 4}s`,
+        }));
+        setParticles(generatedParticles);
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -43,18 +58,12 @@ export default function RegisterPage() {
 
             {/* Floating particles */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(20)].map((_, i) => (
-                   <div
-                   key={i}
-                   className="absolute w-1 h-1 bg-orange-400 rounded-full opacity-20 animate-float"
-                   style={{
-                     left: `${Math.random() * 100}%`,
-                     top: `${Math.random() * 100}%`,
-                     animationDelay: `${Math.random() * 5}s`,
-                     animationDuration: `${3 + Math.random() * 4}s`
-                   }}
-                 />
-                 
+                {particles.map((style, i) => (
+                    <div
+                        key={i}
+                        className="absolute w-1 h-1 bg-orange-400 rounded-full opacity-20 animate-float"
+                        style={style}
+                    />
                 ))}
             </div>
 
@@ -174,9 +183,9 @@ export default function RegisterPage() {
                 <div className="text-center mt-8">
                     <p className="text-gray-400">
                         Already have an account?{' '}
-                        <a href="#" className="text-orange-500 hover:text-orange-400 font-semibold transition-colors duration-200 hover:underline">
+                        <Link href="/login" className="text-orange-500 hover:text-orange-400 font-semibold transition-colors duration-200 hover:underline">
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>
