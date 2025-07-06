@@ -1,7 +1,7 @@
 import type { NextApiRequest , NextApiResponse } from "next";
 import connectToDatabase from "@/database/connect";
 import User from "@/models/userModel";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
     //the method must ne POST!
