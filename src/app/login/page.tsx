@@ -24,6 +24,11 @@ export default function LoginPage() {
     setIsLoading(true);
     
     // Simulate API call
+
+
+
+
+    
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     console.log('Login data:', formData);
@@ -40,7 +45,7 @@ export default function LoginPage() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -left-4 w-72 h-72 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
         <div className="absolute -bottom-8 -right-4 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gray-500 rounded-full mix-blend-multiply filter blur-xl opacity-5 animate-pulse animation-delay-4000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gray-700 rounded-full mix-blend-multiply filter blur-xl opacity-5 animate-pulse animation-delay-4000"></div>
       </div>
 
       {/* Floating particles */}
@@ -74,7 +79,7 @@ export default function LoginPage() {
 
         {/* Form */}
         <div className="space-y-6">
-          <div className="bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-3xl backdrop-blur-sm">
+          <div className="bg-gray-900 rounded-2xl p-8 shadow-2xl border border-gray-800 hover:border-gray-700 transition-all duration-300 hover:shadow-3xl backdrop-blur-sm">
             {/* Email Field */}
             <div className="relative group mb-6">
               <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400 group-focus-within:text-orange-500 transition-colors duration-200" />
@@ -84,7 +89,7 @@ export default function LoginPage() {
                 placeholder="Email Address"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:bg-gray-650 focus:bg-gray-650"
+                className="w-full bg-gray-700 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:bg-gray-650 focus:bg-gray-650"
                 required
               />
             </div>
