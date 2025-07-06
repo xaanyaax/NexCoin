@@ -1,5 +1,5 @@
 import type { NextApiRequest , NextApiResponse } from "next";
-import { connectToDatabase } from "@/database/connect";
+import connectToDatabase from "@/database/connect";
 import User from "@/models/userModel";
 import bcrypt from "bcrypt";
 
