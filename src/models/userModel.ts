@@ -7,7 +7,6 @@ export interface User extends Document {
   role?: 'user' | 'admin'; 
 }
 
-// 2. Create the Mongoose schema
 const userSchema = new Schema<User>({
   username: {
     type: String,
@@ -30,8 +29,6 @@ const userSchema = new Schema<User>({
   }
 }, { timestamps: true }); 
 
-// 3. Create (or reuse) the model to avoid "OverwriteModelError"
 const UserModel = models.User || model<User>('User', userSchema);
 
-// 4. Export the model to use it in your routes
 export default UserModel;

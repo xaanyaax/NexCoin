@@ -2,58 +2,59 @@
 
 import React, { useState, useEffect } from 'react';
 
+const features = [
+  {
+    icon: '🪙',
+    title: 'Live Cryptocurrency Prices',
+    description: 'Stay updated with real-time prices of 100+ cryptocurrencies — including Bitcoin, Ethereum, and more.',
+  },
+  {
+    icon: '📈',
+    title: 'Interactive Price Charts',
+    description: 'Visualize market trends with dynamic 7-day and 30-day price graphs.',
+  },
+  {
+    icon: '🔍',
+    title: 'Smart Search',
+    description: 'Instantly find your favorite coins using a lightning-fast search bar.',
+  },
+  {
+    icon: '💰',
+    title: 'Market Overview',
+    description: 'Track total market cap, 24h volume, BTC dominance, and more — all in one place.',
+  },
+  {
+    icon: '🌎',
+    title: 'Multi-Currency Support',
+    description: 'View prices in your local currency — USD, INR, EUR, and more.',
+  },
+  {
+    icon: '💼',
+    title: 'Coin Details Page',
+    description: 'Get in-depth info for each coin: price history, rank, volume, circulating supply, and social links.',
+  },
+  {
+    icon: '🔥',
+    title: 'Trending Coins',
+    description: 'See what\'s hot right now with the latest trending cryptocurrencies on CoinGecko.',
+  }
+];
+
 const NexCoinLanding = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true); // Ensure window is available
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const features = [
-    {
-      icon: '🪙',
-      title: 'Live Cryptocurrency Prices',
-      description: 'Stay updated with real-time prices of 100+ cryptocurrencies — including Bitcoin, Ethereum, and more.',
-    },
-    {
-      icon: '📈',
-      title: 'Interactive Price Charts',
-      description: 'Visualize market trends with dynamic 7-day and 30-day price graphs.',
-    },
-    {
-      icon: '🔍',
-      title: 'Smart Search',
-      description: 'Instantly find your favorite coins using a lightning-fast search bar.',
-    },
-    {
-      icon: '💰',
-      title: 'Market Overview',
-      description: 'Track total market cap, 24h volume, BTC dominance, and more — all in one place.',
-    },
-    {
-      icon: '🌎',
-      title: 'Multi-Currency Support',
-      description: 'View prices in your local currency — USD, INR, EUR, and more.',
-    },
-    {
-      icon: '💼',
-      title: 'Coin Details Page',
-      description: 'Get in-depth info for each coin: price history, rank, volume, circulating supply, and social links.',
-    },
-    {
-      icon: '🔥',
-      title: 'Trending Coins',
-      description: 'See what\'s hot right now with the latest trending cryptocurrencies on CoinGecko.',
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center">
-        {/* Main Content */}
         <div className="relative z-10 text-center px-4">
           <div className="mb-8">
             <div
@@ -65,16 +66,12 @@ const NexCoinLanding = () => {
               ⭐
             </div>
           </div>
-
           <h1 className="text-7xl md:text-9xl font-bold mb-6 bg-gradient-to-r  bg-clip-text  animate-pulse text-orange-500">
             NexCoin
           </h1>
-
           <p className="text-2xl md:text-3xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Your gateway to the cryptocurrency universe. Track, analyze, and discover the future of digital assets.
           </p>
-
-
         </div>
 
         {/* Scroll Indicator */}
@@ -88,26 +85,22 @@ const NexCoinLanding = () => {
       {/* Features Section */}
       <div className="relative">
         <div className="max-w-4xl mx-auto px-4">
-          {features.map((feature, index) => {
+          {isClient && features.map((feature, index) => {
             const sectionStart = window.innerHeight + (index * window.innerHeight);
             const sectionEnd = sectionStart + window.innerHeight;
             const sectionCenter = sectionStart + (window.innerHeight / 2);
 
-            // Calculate progress through the section (0 to 1)
             const progress = Math.max(0, Math.min(1, (scrollY - sectionStart) / window.innerHeight));
-
-            // Calculate if we're in the active zone (middle 60% of the section)
             const isInActiveZone = scrollY >= sectionCenter - (window.innerHeight * 0.3) &&
               scrollY <= sectionCenter + (window.innerHeight * 0.3);
 
-            // Calculate scale and opacity based on distance from center
             const distanceFromCenter = Math.abs(scrollY - sectionCenter);
             const maxDistance = window.innerHeight * 0.5;
             const proximityFactor = Math.max(0, 1 - (distanceFromCenter / maxDistance));
 
-            const scale = 0.8 + (proximityFactor * 0.4); // Scale from 0.8 to 1.2
-            const opacity = 0.3 + (proximityFactor * 0.7); // Opacity from 0.3 to 1
-            const translateY = (1 - proximityFactor) * 50; // Move up as it gets closer
+            const scale = 0.8 + (proximityFactor * 0.4);
+            const opacity = 0.3 + (proximityFactor * 0.7);
+            const translateY = (1 - proximityFactor) * 50;
 
             return (
               <div
@@ -116,7 +109,7 @@ const NexCoinLanding = () => {
                 style={{
                   transform: `translateY(${translateY}px) scale(${scale})`,
                   opacity: opacity,
-                  transition: 'none' // Remove transition for smoother scroll-based animation
+                  transition: 'none'
                 }}
               >
                 <div className="max-w-2xl mx-auto">
@@ -132,8 +125,8 @@ const NexCoinLanding = () => {
 
                   <h3
                     className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-700 ${isInActiveZone
-                        ? 'text-orange-400 bg-gradient-to-r  bg-clip-text '
-                        : 'text-gray-400'
+                      ? 'text-orange-400 bg-gradient-to-r  bg-clip-text '
+                      : 'text-gray-400'
                       }`}
                     style={{
                       transform: `translateX(${(0.5 - progress) * 100}px)`,
@@ -155,7 +148,6 @@ const NexCoinLanding = () => {
                   </p>
                 </div>
               </div>
-
             );
           })}
         </div>
